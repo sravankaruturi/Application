@@ -13,5 +13,14 @@ namespace MediaCentre01
     /// </summary>
     public partial class App : Application
     {
+
+        private void Application_Startup(Object sender, StartupEventArgs e)
+        {
+            //MainWindow wnd = new MainWindow();
+
+            var wnd = new Pomo();
+            wnd.Show();
+        }
+
     }
 }

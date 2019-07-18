@@ -1,0 +1,6 @@
+Helper and References
+
+https://stackoverflow.com/questions/40097479/play-youtube-videos-in-wpf
+https://www.codeproject.com/Articles/27121/Stream-YouTube-Videos-in-WPF
+https://stackoverflow.com/questions/tagged/youtube-api+wpf
+

@@ -4,9 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaCentre01"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Media Centre - Home" Height="450" Width="800">
-    <Grid>
-        
+        Title="My Companion - Home" Height="450" Width="800"
+        MinWidth="800" SizeToContent="WidthAndHeight"
+>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="Open_CanExecute" Executed="Open_Executed" />
+        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
+        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
+        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+    </Window.CommandBindings>
+
+    <Grid MouseWheel="Grid_MouseWheel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button Click="Pomo_Startup">
+                <TextBlock>Pomodoro</TextBlock>
+            </Button>
+            <Button Command="ApplicationCommands.Open">
+                <TextBlock>File</TextBlock>
+            </Button>
+            <Separator></Separator>
+            <Button Command="MediaCommands.Play">
+                <TextBlock>Play</TextBlock>
+            </Button>
+            <Button Command="MediaCommands.Pause">
+                <TextBlock>Pause</TextBlock>
+            </Button>
+            <Button Command="MediaCommands.Stop">
+                <TextBlock>Stop</TextBlock>
+            </Button>
+        </ToolBar>
+
+        <MediaElement Name="MePlayer" Grid.Row="1" LoadedBehavior="Manual" Stretch="None"></MediaElement>
+
+        <StatusBar Grid.Row="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Name="LblProgressStatus">00:00:00</TextBlock>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
+                <Slider Name="SliProgress" Thumb.DragStarted="SliProgress_OnDragStarted"
+                        Thumb.DragCompleted="SliProgress_OnDragCompleted"
+                        ValueChanged="SliProgress_OnValueChanged"
+                        ></Slider>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="2">
+                <ProgressBar Name="PbVolume" Width="50" Height="12" Maximum="1" Value="{Binding ElementName=MePlayer, Path=Volume}"></ProgressBar>
+            </StatusBarItem>
+        </StatusBar>
+
     </Grid>
+
 </Window>
